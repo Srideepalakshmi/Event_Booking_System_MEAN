@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <style>
+        /* General reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-image: url('https://img.freepik.com/free-vector/network-connection-background_23-2148876664.jpg'); /* Background image */
+            background-size: cover; /* Cover the entire background */
+            background-position: center; /* Center the background image */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between; /* Space between header, container, and footer */
+            align-items: center;
+            min-height: 100vh; /* Ensure the content is vertically centered */
+            font-family: Arial, sans-serif;
+        }
+
+        /* Header Styling */
+        .header {
+            background-color: rgba(0, 0, 0, 0.7); /* Dark background for header */
+            color: white; /* White text */
+            width: 100%;
+            padding: 30px 0; /* Adjusted padding */
+            text-align: center; /* Center the header text */
+            position: fixed; /* Fix the header at the top */
+            top: 0; /* Position it at the top */
+            z-index: 1000; /* Ensure it stays above other content */
+            display: flex; /* Use flexbox for layout */
+            justify-content: space-between; /* Space out logo and links */
+            align-items: center; /* Center vertically */
+            padding: 10px 20px; /* Adjust padding for header */
+        }
+
+        .logo {
+            height: 70px; /* Adjust height of logo as needed */
+            width: 70px; /* Set logo width to make it a square */
+            border-radius: 50%; /* Make it round */
+            object-fit: cover; /* Ensure the image fits inside the circle */
+        }
+
+        .header a {
+            color: white; /* White text for links */
+            text-decoration: none; /* Remove underline from links */
+            margin-right: 20px; /* Space on the right side */
+        }
+
+        /* Signup Container Styling */
+        .signup-container {
+            background-color: rgba(255, 249, 254, 0.696); /* Light background for signup container */
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 4px 10px rgba(155, 32, 32, 0.952);
+            max-width: 600px;
+            width: 90%; /* Allow the box to take up to 90% of the width */
+            margin-top: 150px; /* Increased space below the fixed header */
+            margin-bottom: 20px; /* Space above the footer */
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 15px 0;
+            border: 5px solid #ca0af08f;
+            border-radius: 5px;
+        }
+
+        .signup-button {
+            background-color: #28a745; /* Green background */
+            color: white; /* White text */
+            border: none; /* Remove border */
+            border-radius: 5px; /* Rounded corners */
+            padding: 10px; /* Padding */
+            cursor: pointer; /* Pointer cursor */
+            font-size: 16px; /* Font size */
+            width: 100%;
+        }
+
+        .signup-button:hover {
+            background-color: #218838; /* Darker green on hover */
+        }
+
+        /* Footer Styling */
+        .footer {
+            background-color: rgba(0, 0, 0, 0.769); /* Dark background for footer */
+            color: white; /* White text */
+            width: 100%;
+            text-align: center; /* Center the footer text */
+            padding: 30px 0; /* Padding for footer */
+            position: fixed; /* Fix the footer at the bottom */
+            bottom: 0; /* Position it at the bottom */
+        }
+
+        .account-link {
+            text-align: center; /* Center the account link */
+            margin-top: 10px; /* Space above the link */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <img src="https://static.vecteezy.com/system/resources/previews/043/210/808/non_2x/a-sophisticated-golden-logo-stands-out-against-a-sleek-black-background-create-an-elegant-and-understated-logo-for-a-non-profit-event-organizer-free-vector.jpg" alt="Logo" class="logo">
+        <a href="index.html">Home</a> <!-- Home link -->
+    </div>
+
+    <div class="signup-container">
+        <h2>Sign Up</h2>
+        <form onsubmit="return registerUser(event)">
+            <input type="text" id="fullname" placeholder="Full Name" required>
+            <input type="email" id="email" placeholder="Email" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <input type="password" id="confirm-password" placeholder="Confirm Password" required>
+            <button type="submit" class="signup-button">Sign Up</button>
+        </form>
+        <br>
+        <div class="account-link">
+            <p>Already have an account? <a href="login.html">Log In</a></p>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2024 Eventify | Book amazing events with ease</p>
+    </div>
+
+    <script>
+        async function registerUser(event) {
+            event.preventDefault();
+            
+            const userData = {
+                fullname: document.getElementById("fullname").value,
+                email: document.getElementById("email").value,
+                password: document.getElementById("password").value,
+                confirmPassword: document.getElementById("confirm-password").value
+            };
+            
+            // Password validation
+            if (userData.password !== userData.confirmPassword) {
+                alert("Passwords do not match. Please try again.");
+                return;
+            }
+
+            try {
+                const response = await fetch('http://localhost:5000/signup', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        username: userData.fullname,
+                        email: userData.email,
+                        password: userData.password
+                    })
+                });
+
+                const result = await response.json();
+
+                console.log('Response status:', response.status); // Log status code for debugging
+                console.log('Response result:', result); // Log result to see server response
+
+                if (response.ok) {
+                    alert(result.message || "Signup successful!");
+                    window.location.href = 'login.html'; // Redirect to login page
+                } else {
+                    alert(result.message || "Signup failed. Please check the inputs and try again.");
+                }
+            } catch (error) {
+                console.error('Error during signup:', error);
+                alert('An error occurred during signup. Please try again later.');
+            }
+        }
+    </script>
+    
+</body>
+</html>

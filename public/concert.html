@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Booking System</title>
+    <style>
+        /* General reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcReBGfoJ_sv-3zwtsXb53Twq4OA1GU0Y4Rq_w&s');
+            background-size: 100%; /* Ensure the image covers the whole body */
+            background-position: center; /* Center the image */
+            color: #333;
+        }
+
+        /* Header Styling */
+        header {
+            background-color: rgba(0, 0, 0, 0.886); /* Make header semi-transparent */
+            padding: 15px 20px;
+            color: white;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-container .logo {
+            width: 60px; /* Set width for the logo */
+            height: 60px; /* Set height for the logo */
+            border-radius: 50%; /* Makes the logo round */
+            overflow: hidden; /* Hides overflow if any */
+        }
+
+        .header-container .logo img {
+            width: 100%; /* Ensure image fits within the container */
+            height: auto; /* Maintain aspect ratio */
+        }
+
+        header nav ul {
+            list-style: none;
+            display: flex;
+            gap: 15px;
+        }
+
+        header nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        header nav ul li a:hover {
+            text-decoration: underline;
+        }
+
+        /* Mirror Box Styling */
+        .mirror-box {
+            padding: 50px;
+            text-align: center; /* Align text to the center */
+            background: rgba(255, 249, 249, 0.265); /* White background for mirror boxes */
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Shadow effect */
+            max-width: 1000px; /* Set max width for the mirror box */
+            width: 90%; /* Full width inside the section */
+            margin: 50px auto; /* Center the box */
+        }
+        .mirror-box h1{
+            color:#fefefe;
+        }
+        /* Footer */
+        footer {
+            background-color: rgba(0, 0, 0, 0.863); /* Semi-transparent footer */
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .book-button {
+            background-color: #28a745; /* Green background */
+            color: white; /* White text */
+            border: none; /* Remove border */
+            border-radius: 5px; /* Rounded corners */
+            padding: 10px 20px; /* Padding */
+            cursor: pointer; /* Pointer cursor */
+            font-size: 16px; /* Font size */
+            margin-top: 10px; /* Space above button */
+        }
+
+        .book-button:hover {
+            background-color: #218838; /* Darker green on hover */
+        }
+
+        .event-item {
+            margin-bottom: 30px; /* Space between events */
+            padding: 30px; /* Padding inside each event box */
+            border: 10px solid #4170c8; /* Border around each event */
+            border-radius: 10px; /* Rounded corners */
+            background: rgba(255, 255, 255, 0.751); /* Slightly transparent white */
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto; /* 15% from the top and centered */
+            padding: 20px;
+            border: 7px solid #0788ead0;
+            width: 80%; /* Could be more or less, depending on screen size */
+            max-width: 500px;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .action-button {
+            background-color: #007bff; /* Blue background */
+            color: white; /* White text */
+            border: none; /* Remove border */
+            border-radius: 5px; /* Rounded corners */
+            padding: 10px 20px; /* Padding */
+            cursor: pointer; /* Pointer cursor */
+            font-size: 16px; /* Font size */
+            margin: 5px; /* Space around button */
+        }
+
+        .action-button:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <img src="https://static.vecteezy.com/system/resources/previews/043/210/808/non_2x/a-sophisticated-golden-logo-stands-out-against-a-sleek-black-background-create-an-elegant-and-understated-logo-for-a-non-profit-event-organizer-free-vector.jpg" alt="Event Logo">
+            </div>
+            <nav>
+                <ul>
+                    <nav>
+                        <ul>
+                            <li><a href="login.html">Log In</a></li>
+                            <li><a href="signup.html">Sign Up</a></li>
+                        </ul>
+                    </nav>
+                    <li><a href="index.html">Home</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="mirror-box">
+        <h1><b><i>Upcoming Concerts</i></b></h1>
+<br><br>
+        <div class="event-item">
+            <h2>Summer Music Festival</h2><br>
+            <p><strong>Date:</strong> June 15, 2024</p><br>
+            <p><strong>Time:</strong> 5:00 PM</p><br>
+            <p><strong>Amount:</strong> $75</p><br>
+            <p><strong>Description:</strong> Join us for an unforgettable evening with top artists at the Summer Music Festival! Enjoy live performances, food stalls, and a vibrant atmosphere.</p><br>
+            <button class="book-button" onclick="bookEvent('Summer Music Festival')">Book Now</button>
+        </div>
+
+        <div class="event-item">
+            <h2>Rock the Night Concert</h2><br>
+            <p><strong>Date:</strong> July 20, 2024</p><br>
+            <p><strong>Time:</strong> 8:00 PM</p><br>
+            <p><strong>Amount:</strong> $50</p><br>
+            <p><strong>Description:</strong> Experience the thrill of live rock music at the Rock the Night Concert! Featuring renowned bands and electrifying performances.</p><br>
+            <button class="book-button" onclick="bookEvent('Rock the Night Concert')">Book Now</button>
+        </div>
+
+        <div class="event-item">
+            <h2>Jazz Under the Stars</h2><br>
+            <p><strong>Date:</strong> August 12, 2024</p><br>
+            <p><strong>Time:</strong> 7:30 PM</p><br>
+            <p><strong>Amount:</strong> $60</p><br>
+            <p><strong>Description:</strong> Enjoy a magical evening of smooth jazz music under the stars with talented musicians. A perfect night for jazz lovers!</p><br>
+            <button class="book-button" onclick="bookEvent('Jazz Under the Stars')">Book Now</button>
+        </div>
+
+        <div class="event-item">
+            <h2>Classical Evening Gala</h2><br>
+            <p><strong>Date:</strong> September 5, 2024</p><br>
+            <p><strong>Time:</strong> 6:00 PM</p><br>
+            <p><strong>Amount:</strong> $100</p><br>
+            <p><strong>Description:</strong> Experience the elegance of classical music at our gala evening featuring orchestras and soloists. A night of sophistication and culture.</p><br>
+            <button class="book-button" onclick="bookEvent('Classical Evening Gala')">Book Now</button>
+        </div>
+
+        <div class="event-item">
+            <h2>Electronic Dance Party</h2><br>
+            <p><strong>Date:</strong> October 10, 2024</p><br>
+            <p><strong>Time:</strong> 9:00 PM</p><br>
+            <p><strong>Amount:</strong> $40</p><br>
+            <p><strong>Description:</strong> Get ready to dance the night away at the Electronic Dance Party! Featuring top DJs and an electrifying atmosphere.</p><br>
+            <button class="book-button" onclick="bookEvent('Electronic Dance Party')">Book Now</button>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Eventify | Book amazing events with ease</p>
+    </footer>
+
+    <!-- Modal for Login and Sign Up -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>You need to log in or sign up to book an event.</h2>
+            <button class="action-button" onclick="openLogin()">Log In</button>
+            <button class="action-button" onclick="openSignUp()">Sign Up</button>
+        </div>
+    </div>
+
+    <script>
+        function bookEvent(eventName) {
+            // Replace this with your actual logic to check if the user is logged in
+            var isLoggedIn = false; // Simulating user login status
+            if (isLoggedIn) {
+                alert("You have booked " + eventName);
+            } else {
+                openModal(); // Open modal if not logged in
+            }
+        }
+
+        function openModal() {
+            document.getElementById('modal').style.display = "block";
+        }
+
+        function closeModal() {
+            document.getElementById('modal').style.display = "none";
+        }
+
+        function openLogin() {
+            // Redirect to your login page or show a login form
+            window.location.href = "login.html"; // Change to your actual login page
+        }
+
+        function openSignUp() {
+            // Redirect to your sign-up page or show a sign-up form
+            window.location.href = "signup.html"; // Change to your actual sign-up page
+        }
+
+        // Close the modal if the user clicks anywhere outside of it
+        window.onclick = function(event) {
+            var modal = document.getElementById('modal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+</html>

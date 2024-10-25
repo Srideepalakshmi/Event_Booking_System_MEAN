@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="eventBookingApp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Booking System</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body ng-controller="HomeController">
+
+    <!-- Header Section -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <img src="https://static.vecteezy.com/system/resources/previews/043/210/808/non_2x/a-sophisticated-golden-logo-stands-out-against-a-sleek-black-background-create-an-elegant-and-understated-logo-for-a-non-profit-event-organizer-free-vector.jpg" alt="SJS Event Booking" style="height: 50px;">
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="login.html">Log In</a></li>
+                    <li><a href="signup.html">Sign Up</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1><b><b><i>Book Your Next Event</i></b></b></h1>
+            <p><b>Find and book amazing events happening near you.</b></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="categories">
+        <br><br>
+        <h2><b><i>Popular Event Categories</i></b></h2>
+        <br><br>
+        <div class="category-grid">
+            <div class="category-item" ng-repeat="category in categories">
+                <div class="mirror-box">
+                    <h3>{{ category.name }}</h3>
+                    <p>{{ category.info }}</p>
+                    <button class="book-button" ng-click="bookCategory(category.name)">Book Now</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Us Section -->
+    <section class="about-us">
+        <h2><b><i>About Us</i></b></h2>
+        <div class="about-box">
+            <img src="https://cdni.iconscout.com/illustration/free/thumb/free-about-us-illustration-download-in-svg-png-gif-file-formats--business-employee-finance-pack-illustrations-1740019.png" alt="About Us Image" class="about-image">
+            <div class="mirror-box">
+                <h3><b>What We Do!</b></h3><br>
+                <p><i>We connect you with the best events in town, ensuring a memorable experience.</i></p><br><br>
+                <h3><b>Our Mission!</b></h3><br>
+                <p><i>To simplify the event booking process and enhance your experience.</i></p><br><br>
+                <h3><b>Our Vision!</b></h3><br>
+                <p><i>To be the leading platform for discovering and booking events globally.</i></p><br><br>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Us Section -->
+    <div class="contact-us">
+        <div class="mirror-box">
+            <h3><b>For Any Query</b></h3><br>
+            <h2><b>Contact Us</b></h2>
+            <div class="contact-info">
+                <div class="contact-details">
+                    <h3><span class="emoji">📞</span> Phone</h3>
+                    <p>9500718240</p>
+                </div>
+                <div class="contact-details">
+                    <h3><span class="emoji">✉️</span> Email</h3>
+                    <p><a href="mailto:info@example.com">info@22uit.com</a></p>
+                </div>
+                <div class="contact-details">
+                    <h3><span class="emoji">🌐</span> Website</h3>
+                    <p><a href="https://www.example.com">www.22uit.com</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2024 Eventify | Book amazing events with ease</p>
+    </footer>
+
+    <script>
+        var app = angular.module('eventBookingApp', []);
+
+        app.controller('HomeController', function($scope) {
+            // Home page logic
+            $scope.categories = [
+                { name: 'Concerts', info: 'Enjoy live performances from your favorite artists.' },
+                { name: 'Workshops', info: 'Participate in hands-on learning experiences.' },
+                { name: 'Festivals', info: 'Join us for a celebration of culture and art.' },
+                { name: 'Theater', info: 'Watch captivating plays and performances.' },
+                { name: 'Conferences', info: 'Network and learn about the latest industry trends.' },
+                { name: 'Sports', info: 'Catch thrilling games and matches.' }
+            ];
+
+            $scope.bookCategory = function(categoryName) {
+                if (categoryName === 'Concerts') {
+                    window.location.href = 'concert.html';
+                } else if (categoryName === 'Conferences') {
+                    window.location.href = 'conference.html';
+                } else if (categoryName === 'Workshops') {
+                    window.location.href = 'workshop.html';
+                } else if (categoryName === 'Theater') {
+                    window.location.href = 'theater.html';
+                } else if (categoryName === 'Sports') {
+                    window.location.href = 'sports.html';
+                } else if (categoryName === 'Festivals') {
+                    window.location.href = 'festival.html';
+                }
+            };
+        });
+    </script>
+
+    <style>
+        /* Add some basic styles for the modal */
+        .modal {
+            display: block; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto; /* 15% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%; /* Could be more or less, depending on screen size */
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</body>
+</html>

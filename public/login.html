@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        /* General reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-image: url('https://img.freepik.com/free-vector/geometric-gradient-futuristic-background_23-2149116406.jpg'); /* Background image */
+            background-size: cover; /* Cover the entire background */
+            background-position: center; /* Center the background image */
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Ensure footer stays at the bottom */
+            font-family: Arial, sans-serif;
+        }
+
+        /* Header Styling */
+        .header {
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.769); /* Semi-transparent header */
+            padding: 10px 20px;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .header h1 {
+            margin: 0;
+        }
+
+        .header img {
+            height: 70px;
+            width: 70px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .header a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            text-align: center;
+            padding-right: 20px;
+            margin-left: auto;
+        }
+
+        /* Mirror Box Styling */
+        .mirror-box {
+            background-color: rgba(255, 249, 249, 0.623); /* Light background for mirror box */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(45, 149, 214, 0.783);
+            max-width: 500px;
+            width: 90%;
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-top: 150px;
+            margin-bottom: 50px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        input[type="email"], input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 15px 0;
+            border: 5px solid #093dea58;
+            border-radius: 5px;
+        }
+
+        .login-button {
+            background-color: #22a941;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+        }
+
+        .login-button:hover {
+            background-color: #218838;
+        }
+
+        /* Footer Styling */
+        .footer {
+            text-align: center;
+            padding: 30px;
+            background-color: rgba(0, 0, 0, 0.769);
+            color: white;
+            width: 100%;
+            position: fixed;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <img src="https://static.vecteezy.com/system/resources/previews/043/210/808/non_2x/a-sophisticated-golden-logo-stands-out-against-a-sleek-black-background-create-an-elegant-and-understated-logo-for-a-non-profit-event-organizer-free-vector.jpg" alt="Logo">
+        <a href="index.html">Home</a>
+    </div>
+
+    <div class="mirror-box">
+        <h2>Log In</h2>
+        <form onsubmit="return loginUser(event)">
+            <input type="email" id="email" placeholder="Email" required> <!-- Correct email input -->
+            <input type="password" id="password" placeholder="Password" required>
+            <button type="submit" class="login-button">Log In</button>
+        </form>
+        <br>
+        <div class="account-link">
+            <p>Don't have an account? <a href="signup.html">Sign Up</a></p>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2024 Eventify | Book amazing events with ease</p>
+    </div>
+
+    <script>
+        async function loginUser(event) {
+            event.preventDefault();
+            
+            const loginData = {
+                email: document.getElementById("email").value,
+                password: document.getElementById("password").value
+            };
+    
+            try {
+                const response = await fetch('http://localhost:5000/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(loginData)
+                });
+    
+                const result = await response.json();
+                if (response.ok) {
+                    alert(result.message || "Login successful!");
+                    window.location.href = 'booking.html'; // Redirect to booking page after login
+                } else {
+                    alert(result.message || "Login failed. Try again.");
+                }
+            } catch (error) {
+                console.error('Error during login:', error);
+                alert('An error occurred. Please try again.');
+            }
+        }
+    </script>
+
+</body>
+</html>

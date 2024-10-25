@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Booking System</title>
+    <style>
+        /* General reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-image: url('https://t4.ftcdn.net/jpg/01/28/73/79/360_F_128737970_Qtw2lAUDgFyBjG528Yhu5rdUguVJRDth.jpg');
+            background-size: 150%; /* Ensure the image covers the whole body */
+            background-position: center; /* Center the image */
+            color: #333;
+        }
+
+        /* Header Styling */
+        header {
+            background-color: rgba(0, 0, 0, 0.863); /* Make header semi-transparent */
+            padding: 15px 20px;
+            color: white;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-container .logo {
+            width: 60px; /* Set width for the logo */
+            height: 60px; /* Set height for the logo */
+            border-radius: 50%; /* Makes the logo round */
+            overflow: hidden; /* Hides overflow if any */
+        }
+
+        .header-container .logo img {
+            width: 100%; /* Ensure image fits within the container */
+            height: auto; /* Maintain aspect ratio */
+        }
+
+        header nav ul {
+            list-style: none;
+            display: flex;
+            gap: 15px;
+        }
+
+        header nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        header nav ul li a:hover {
+            text-decoration: underline;
+        }
+
+        /* Mirror Box Styling */
+        .mirror-box {
+            padding: 50px;
+            text-align: center; /* Align text to the center */
+            background: rgba(255, 249, 249, 0.6); /* White background for mirror boxes */
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgb(250, 3, 3); /* Shadow effect */
+            max-width: 1000px; /* Set max width for the mirror box */
+            width: 90%; /* Full width inside the section */
+            margin: 50px auto; /* Center the box */
+        }
+
+        /* Footer */
+        footer {
+            background-color: rgba(0, 0, 0, 0.863); /* Semi-transparent footer */
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .book-button {
+            background-color: #28a745; /* Green background */
+            color: white; /* White text */
+            border: none; /* Remove border */
+            border-radius: 5px; /* Rounded corners */
+            padding: 10px 20px; /* Padding */
+            cursor: pointer; /* Pointer cursor */
+            font-size: 16px; /* Font size */
+            margin-top: 10px; /* Space above button */
+        }
+
+        .book-button:hover {
+            background-color: #218838; /* Darker green on hover */
+        }
+
+        .event-item {
+    margin-bottom: 30px; /* Space between events */
+    padding: 20px; /* Padding inside each event box */
+    border: 10px solid #ed7512d5; /* Border around each event */
+    border-radius: 10px; /* Rounded corners */
+    background: rgba(255, 255, 255, 0.783); /* Slightly transparent white */
+    box-shadow: 0 4px 10px rgba(211, 97, 27, 0.575); /* Shadow effect for mirror look */
+    text-align: center; /* Center content within the box */
+    width: 80%; /* Set the width of each event */
+    margin: 20px auto; /* Center the event item on the page */
+    max-width: 600px; /* Set a maximum width */
+}
+
+
+        /* Modal Styles */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto; /* 15% from the top and centered */
+            padding: 20px;
+            border: 7px solid #ec771e8d;
+            width: 80%; /* Could be more or less, depending on screen size */
+            max-width: 500px;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .action-button {
+            background-color: #007bff; /* Blue background */
+            color: white; /* White text */
+            border: none; /* Remove border */
+            border-radius: 5px; /* Rounded corners */
+            padding: 10px 20px; /* Padding */
+            cursor: pointer; /* Pointer cursor */
+            font-size: 16px; /* Font size */
+            margin: 5px; /* Space around button */
+        }
+
+        .action-button:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <img src="https://static.vecteezy.com/system/resources/previews/043/210/808/non_2x/a-sophisticated-golden-logo-stands-out-against-a-sleek-black-background-create-an-elegant-and-understated-logo-for-a-non-profit-event-organizer-free-vector.jpg" alt="Event Logo">
+            </div>
+            <nav>
+                <ul>
+                    <nav>
+                        <ul>
+                            <li><a href="login.html">Log In</a></li>
+                            <li><a href="signup.html">Sign Up</a></li>
+                        </ul>
+                    </nav>
+                    <li><a href="index.html">Home</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="mirror-box">
+        <h1><b><i>Upcoming Workshops</i></b></h1>
+
+        <div class="event-item">
+            <h2>Creative Writing Workshop</h2><br>
+            <p><strong>Date:</strong> November 10, 2024</p><br>
+            <p><strong>Time:</strong> 10:00 AM</p><br>
+            <p><strong>Amount:</strong> $50</p><br>
+            <p><strong>Description:</strong> Join us for an engaging creative writing workshop where you'll learn tips and techniques from experienced authors. Perfect for all skill levels!</p><br>
+            <button class="book-button" onclick="bookEvent('Creative Writing Workshop')">Book Now</button>
+        </div>
+
+        <div class="event-item">
+            <h2>Photography Basics Workshop</h2><br>
+            <p><strong>Date:</strong> November 25, 2024</p><br>
+            <p><strong>Time:</strong> 2:00 PM</p><br>
+            <p><strong>Amount:</strong> $75</p><br>
+            <p><strong>Description:</strong> Discover the fundamentals of photography in this hands-on workshop. Bring your camera and get ready to capture stunning images!</p><br>
+            <button class="book-button" onclick="bookEvent('Photography Basics Workshop')">Book Now</button>
+        </div>
+
+        <div class="event-item">
+            <h2>Web Development Bootcamp</h2><br>
+            <p><strong>Date:</strong> December 5, 2024</p><br>
+            <p><strong>Time:</strong> 9:00 AM</p><br>
+            <p><strong>Amount:</strong> $150</p><br>
+            <p><strong>Description:</strong> Dive into the world of web development with our comprehensive bootcamp! Learn HTML, CSS, and JavaScript in a collaborative environment.</p><br>
+            <button class="book-button" onclick="bookEvent('Web Development Bootcamp')">Book Now</button>
+        </div>
+
+        <div class="event-item">
+            <h2>Graphic Design Essentials</h2><br>
+            <p><strong>Date:</strong> December 15, 2024</p><br>
+            <p><strong>Time:</strong> 1:00 PM</p><br>
+            <p><strong>Amount:</strong> $100</p><br>
+            <p><strong>Description:</strong> Enhance your design skills in our Graphic Design Essentials workshop. Learn about color theory, typography, and layout design!</p><br>
+            <button class="book-button" onclick="bookEvent('Graphic Design Essentials')">Book Now</button>
+        </div>
+
+        <div class="event-item">
+            <h2>Digital Marketing Strategies</h2><br>
+            <p><strong>Date:</strong> January 10, 2025</p><br>
+            <p><strong>Time:</strong> 3:00 PM</p><br>
+            <p><strong>Amount:</strong> $80</p><br>
+            <p><strong>Description:</strong> Learn effective digital marketing strategies to boost your business or personal brand. This workshop is designed for beginners and experts alike!</p><br>
+            <button class="book-button" onclick="bookEvent('Digital Marketing Strategies')">Book Now</button>
+        </div>
+    </div>
+    <footer>
+        <p>&copy; 2024 Eventify | Book amazing events with ease</p>
+    </footer>
+
+    <!-- Modal for Login and Sign Up -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>You need to log in or sign up to book an event.</h2>
+            <button class="action-button" onclick="openLogin()">Log In</button>
+            <button class="action-button" onclick="openSignUp()">Sign Up</button>
+        </div>
+    </div>
+
+    <script>
+        function bookEvent(eventName) {
+            // Replace this with your actual logic to check if the user is logged in
+            var isLoggedIn = false; // Simulating user login status
+            if (isLoggedIn) {
+                alert("You have booked " + eventName);
+            } else {
+                openModal(); // Open modal if not logged in
+            }
+        }
+
+        function openModal() {
+            document.getElementById('modal').style.display = "block";
+        }
+
+        function closeModal() {
+            document.getElementById('modal').style.display = "none";
+        }
+
+        function openLogin() {
+            // Redirect to your login page or show a login form
+            window.location.href = "login.html"; // Change to your actual login page
+        }
+
+        function openSignUp() {
+            // Redirect to your sign-up page or show a sign-up form
+            window.location.href = "signup.html"; // Change to your actual sign-up page
+        }
+
+        // Close the modal if the user clicks anywhere outside of it
+        window.onclick = function(event) {
+            var modal = document.getElementById('modal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+</html>
+
+

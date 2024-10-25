@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking List</title>
+    <style>
+          /* General reset */
+          * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-image: url('https://img.freepik.com/free-photo/education-college-read-information-table_1150-1615.jpg');
+            background-size: cover;
+            background-position: center;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Header Styling */
+        .header {
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.769);
+            padding: 10px 20px;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            margin: 0;
+        }
+
+        .header img {
+            height: 70px;
+            width: 70px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .header a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            padding-right: 20px;
+            margin-left: auto;
+        }
+
+        /* Mirror Box Styling */
+        .mirror-box {
+            background-color: rgba(255, 249, 249, 0.6);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(64, 127, 227, 0.879);
+            max-width: 700px;
+            width: 100%;
+            margin: 50px auto;
+            flex: 1;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"] {
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            border: 5px solid #40addcba;
+            border-radius: 5px;
+        }
+
+        .submit-button {
+            background-color: #149d34;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+        }
+
+        .submit-button:hover {
+            background-color: #218838;
+        }
+
+        /* Footer Styling */
+        .footer {
+            text-align: center;
+            padding: 10px;
+            background-color: rgba(0, 0, 0, 0.769);
+            color: white;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Booking List</h1>
+        <a href="index.html">Home</a>
+    </div>
+
+    <div class="mirror-box" id="bookingList">
+        <h2>Your Bookings</h2>
+        <ul id="bookingItems"></ul>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2024 Eventify | Book amazing events with ease</p>
+    </div>
+
+    <script>
+        async function fetchBookings() {
+            try {
+                const response = await fetch('http://localhost:5000/api/bookings/list'); // Use the correct endpoint
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const bookings = await response.json();
+                displayBookings(bookings);
+            } catch (error) {
+                console.error('Error fetching bookings:', error);
+                alert('There was an issue fetching the booking list. Please try again later.');
+            }
+        }
+
+        function displayBookings(bookings) {
+            const bookingItems = document.getElementById('bookingItems');
+            bookingItems.innerHTML = ''; // Clear any previous items
+
+            bookings.forEach(booking => {
+                const listItem = document.createElement('li');
+                listItem.textContent = `${booking.name} - ${booking.eventName} (${booking.email})`;
+                bookingItems.appendChild(listItem);
+            });
+        }
+
+        // Fetch bookings when the page loads
+        window.onload = fetchBookings;
+    </script>
+</body>
+</html>

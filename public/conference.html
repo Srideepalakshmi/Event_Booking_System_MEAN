@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Booking System</title>
+    <style>
+        /* General reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-image: url('https://freedesignfile.com/upload/2017/01/Future-technical-background-Stock-Photo-04.jpg');
+            background-size: cover; /* Ensure the image covers the whole body */
+            background-position: center; /* Center the image */
+            color: #333;
+        }
+
+        /* Header Styling */
+        header {
+            background-color: rgba(0, 0, 0, 0.886); /* Make header semi-transparent */
+            padding: 15px 20px;
+            color: white;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-container .logo {
+            width: 60px; /* Set width for the logo */
+            height: 60px; /* Set height for the logo */
+            border-radius: 50%; /* Makes the logo round */
+            overflow: hidden; /* Hides overflow if any */
+        }
+
+        .header-container .logo img {
+            width: 100%; /* Ensure image fits within the container */
+            height: auto; /* Maintain aspect ratio */
+        }
+
+        header nav ul {
+            list-style: none;
+            display: flex;
+            gap: 15px;
+        }
+
+        header nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        header nav ul li a:hover {
+            text-decoration: underline;
+        }
+
+        /* Mirror Box Styling */
+        .mirror-box {
+            padding: 50px;
+            text-align: center; /* Align text to the center */
+            background: rgba(255, 249, 249, 0.6); /* White background for mirror boxes */
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(47, 144, 224, 0.4); /* Shadow effect */
+            max-width: 1000px; /* Set max width for the mirror box */
+            width: 90%; /* Full width inside the section */
+            margin: 50px auto; /* Center the box */
+        }
+
+        /* Footer */
+        footer {
+            background-color: rgba(0, 0, 0, 0.886); /* Semi-transparent footer */
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .book-button {
+            background-color: #28a745; /* Green background */
+            color: white; /* White text */
+            border: none; /* Remove border */
+            border-radius: 5px; /* Rounded corners */
+            padding: 10px 20px; /* Padding */
+            cursor: pointer; /* Pointer cursor */
+            font-size: 16px; /* Font size */
+            margin-top: 10px; /* Space above button */
+        }
+
+        .book-button:hover {
+            background-color: #218838; /* Darker green on hover */
+        }
+
+        .event-item {
+            margin-bottom: 30px; /* Space between events */
+            padding: 20px; /* Padding inside each event box */
+            border: 10px solid #2f70a4b3; /* Border around each event */
+            border-radius: 10px; /* Rounded corners */
+            background: rgba(255, 255, 255, 0.8); /* Slightly transparent white */
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto; /* 15% from the top and centered */
+            padding: 20px;
+            border: 7px solid #2f70a4b3 ;
+            width: 80%; /* Could be more or less, depending on screen size */
+            max-width: 500px;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .action-button {
+            background-color: #007bff; /* Blue background */
+            color: white; /* White text */
+            border: none; /* Remove border */
+            border-radius: 5px; /* Rounded corners */
+            padding: 10px 20px; /* Padding */
+            cursor: pointer; /* Pointer cursor */
+            font-size: 16px; /* Font size */
+            margin: 5px; /* Space around button */
+        }
+
+        .action-button:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <img src="https://static.vecteezy.com/system/resources/previews/043/210/808/non_2x/a-sophisticated-golden-logo-stands-out-against-a-sleek-black-background-create-an-elegant-and-understated-logo-for-a-non-profit-event-organizer-free-vector.jpg" alt="Event Logo">
+            </div>
+            <nav>
+                <ul>
+                    <nav>
+                        <ul>
+                            <li><a href="login.html">Log In</a></li>
+                            <li><a href="signup.html">Sign Up</a></li>
+                        </ul>
+                    </nav>
+                    <li><a href="index.html">Home</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="mirror-box">
+        <h1><b><i>Upcoming Conferences</i></b></h1>
+        <br><br>
+        <div class="event-item">
+            <h2>Global Tech Conference 2024</h2><br>
+            <p><strong>Date:</strong> March 15-17, 2024</p><br>
+            <p><strong>Location:</strong> San Francisco, CA</p><br>
+            <p><strong>Amount:</strong> $299</p><br>
+            <p><strong>Description:</strong> Join industry leaders and innovators for a three-day event focused on the latest advancements in technology. Workshops, keynotes, and networking opportunities await!</p><br>
+            <button class="book-button" onclick="bookEvent('Global Tech Conference 2024')">Book Now</button>
+        </div>
+
+        <div class="event-item">
+            <h2>International Business Summit</h2><br>
+            <p><strong>Date:</strong> April 22-24, 2024</p><br>
+            <p><strong>Location:</strong> New York City, NY</p><br>
+            <p><strong>Amount:</strong> $399</p><br>
+            <p><strong>Description:</strong> A gathering of top business minds to discuss trends, strategies, and innovations shaping the future of business. Keynote speeches and panel discussions included.</p><br>
+            <button class="book-button" onclick="bookEvent('International Business Summit')">Book Now</button>
+        </div>
+
+        <div class="event-item">
+            <h2>Healthcare Innovation Conference</h2><br>
+            <p><strong>Date:</strong> May 10-12, 2024</p><br>
+            <p><strong>Location:</strong> Chicago, IL</p><br>
+            <p><strong>Amount:</strong> $350</p><br>
+            <p><strong>Description:</strong> Explore groundbreaking advancements in healthcare at this conference. Networking sessions, expert talks, and case studies will be part of the program.</p><br>
+            <button class="book-button" onclick="bookEvent('Healthcare Innovation Conference')">Book Now</button>
+        </div>
+
+        <div class="event-item">
+            <h2>Digital Marketing Expo 2024</h2><br>
+            <p><strong>Date:</strong> June 5-7, 2024</p><br>
+            <p><strong>Location:</strong> Los Angeles, CA</p><br>
+            <p><strong>Amount:</strong> $250</p><br>
+            <p><strong>Description:</strong> Learn the latest in digital marketing trends and strategies at this comprehensive expo. Workshops and networking events are included.</p><br>
+            <button class="book-button" onclick="bookEvent('Digital Marketing Expo 2024')">Book Now</button>
+        </div>
+
+        <div class="event-item">
+            <h2>Artificial Intelligence Forum</h2><br>
+            <p><strong>Date:</strong> July 15-16, 2024</p><br>
+            <p><strong>Location:</strong> Austin, TX</p><br>
+            <p><strong>Amount:</strong> $199</p><br>
+            <p><strong>Description:</strong> Join AI experts and enthusiasts for two days of discussions, demonstrations, and hands-on workshops. Explore the future of artificial intelligence!</p><br>
+            <button class="book-button" onclick="bookEvent('Artificial Intelligence Forum')">Book Now</button>
+        </div>
+
+        <div class="event-item">
+            <h2>Climate Change Conference 2024</h2><br>
+            <p><strong>Date:</strong> August 8-10, 2024</p><br>
+            <p><strong>Location:</strong> Seattle, WA</p><br>
+            <p><strong>Amount:</strong> $275</p><br>
+            <p><strong>Description:</strong> A crucial conference addressing global climate change. Engage with experts, participate in workshops, and network with like-minded individuals.</p><br>
+            <button class="book-button" onclick="bookEvent('Climate Change Conference 2024')">Book Now</button>
+        </div>
+    </div>
+    <footer>
+        <p>&copy; 2024 Eventify | Book amazing events with ease</p>
+    </footer>
+
+    <!-- Modal for Login and Sign Up -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>You need to log in or sign up to book an event.</h2>
+            <button class="action-button" onclick="openLogin()">Log In</button>
+            <button class="action-button" onclick="openSignUp()">Sign Up</button>
+        </div>
+    </div>
+
+    <script>
+        function bookEvent(eventName) {
+            // Replace this with your actual logic to check if the user is logged in
+            var isLoggedIn = false; // Simulating user login status
+            if (isLoggedIn) {
+                alert("You have booked " + eventName);
+            } else {
+                openModal(); // Open modal if not logged in
+            }
+        }
+
+        function openModal() {
+            document.getElementById('modal').style.display = "block";
+        }
+
+        function closeModal() {
+            document.getElementById('modal').style.display = "none";
+        }
+
+        function openLogin() {
+            // Redirect to your login page or show a login form
+            window.location.href = "login.html"; // Change to your actual login page
+        }
+
+        function openSignUp() {
+            // Redirect to your sign-up page or show a sign-up form
+            window.location.href = "signup.html"; // Change to your actual sign-up page
+        }
+
+        // Close the modal if the user clicks anywhere outside of it
+        window.onclick = function(event) {
+            var modal = document.getElementById('modal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+</html>
+

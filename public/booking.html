@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Booking</title>
+    <style>
+        /* General reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-image: url('https://e1.pxfuel.com/desktop-wallpaper/721/613/desktop-wallpaper-abstract-login-page.jpg');
+            background-size: cover;
+            background-position: center;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Header Styling */
+        .header {
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.769);
+            padding: 10px 20px;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            margin: 0;
+        }
+
+        .header img {
+            height: 70px;
+            width: 70px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .header a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            padding-right: 20px;
+            margin-left: auto;
+        }
+
+        /* Mirror Box Styling */
+        .mirror-box {
+            background-color: rgba(255, 249, 249, 0.6);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(64, 127, 227, 0.879);
+            max-width: 700px;
+            width: 100%;
+            margin: 50px auto;
+            flex: 1;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"] {
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            border: 5px solid #40addcba;
+            border-radius: 5px;
+        }
+
+        .submit-button {
+            background-color: #149d34;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+        }
+
+        .submit-button:hover {
+            background-color: #218838;
+        }
+
+        /* Footer Styling */
+        .footer {
+            text-align: center;
+            padding: 10px;
+            background-color: rgba(0, 0, 0, 0.769);
+            color: white;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <img src="https://static.vecteezy.com/system/resources/previews/043/210/808/non_2x/a-sophisticated-golden-logo-stands-out-against-a-sleek-black-background-create-an-elegant-and-understated-logo-for-a-non-profit-event-organizer-free-vector.jpg" alt="Logo">
+        <a href="index.html">Home</a>
+    </div>
+
+    <div class="mirror-box">
+        <h2>Booking Details</h2>
+        <form id="bookingForm" onsubmit="submitBooking(event)">
+            <input type="text" id="name" placeholder="Name" required>
+            <input type="email" id="email" placeholder="Email" required>
+            <input type="tel" id="phone" placeholder="Phone No" required>
+            <input type="text" id="address" placeholder="Address" required>
+            <input type="text" id="eventName" placeholder="Event Name" required>
+            <input type="text" id="upiId" placeholder="UPI ID" required>
+            <button type="submit" class="submit-button">Submit Booking</button>
+        </form>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2024 Eventify | Book amazing events with ease</p>
+    </div>
+
+    <script>
+        async function submitBooking(event) {
+            event.preventDefault();
+
+            const bookingData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                address: document.getElementById('address').value,
+                eventName: document.getElementById('eventName').value,
+                upiId: document.getElementById('upiId').value
+            };
+
+            try {
+                const response = await fetch('http://localhost:5000/api/bookings/book', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(bookingData)
+                });
+
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+
+                const result = await response.json();
+                alert(result.message);
+
+                // Redirect to bookinglist.html after alert is acknowledged
+                window.location.href = 'bookinglist.html';
+            } catch (err) {
+                console.error('Error submitting booking:', err);
+                alert('There was an issue submitting your booking.');
+            }
+        }
+    </script>
+
+</body>
+</html>
